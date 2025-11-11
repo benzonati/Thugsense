@@ -206,7 +206,7 @@ local Library do
             ["Text Border"] = FromRGB(0, 0, 0)
         },
 
-        MenuKeybind = Enum.KeyCode.RightControl, 
+        MenuKeybind = Enum.KeyCode.Z, 
 
         Tween = {
             Time = 0.3,
@@ -215,18 +215,18 @@ local Library do
         },
 
         Folders = {
-            Directory = "thugsense",
-            Configs = "thugsense/Configs",
-            Assets = "thugsense/Assets"
+            Directory = "scriptname",
+            Configs = "scriptname/Configs",
+            Assets = "scriptname/Assets"
         },
 
         Images = { -- you're welcome to reupload the images and replace it with your own links
-            ["Saturation"] = {"Saturation.png", "https://github.com/benzonati/Thugsense/blob/main/assets/saturation.png?raw=true" },
-            ["Value"] = { "Value.png", "https://github.com/benzonati/Thugsense/blob/main/assets/value.png?raw=true" },
-            ["Hue"] = { "Hue.png", "https://github.com/benzonati/Thugsense/blob/main/assets/hue.png?raw=true" },
-            ["Scrollbar"] =  { "Scrollbar.png", "https://github.com/benzonati/Thugsense/blob/main/assets/scrollbar.png?raw=true" },
-            ["Checkers"] = { "Checkers.png", "https://github.com/benzonati/Thugsense/blob/main/assets/checkers.png?raw=true" },
-            ["Resize"] = { "Resize.png", "https://github.com/benzonati/Thugsense/blob/main/assets/resize.png?raw=true" },
+            ["Saturation"] = {"Saturation.png", "https://github.com/sametexe001/images/blob/main/saturation.png?raw=true" },
+            ["Value"] = { "Value.png", "https://github.com/sametexe001/images/blob/main/value.png?raw=true" },
+            ["Hue"] = { "Hue.png", "https://github.com/sametexe001/images/blob/main/hue.png?raw=true" },
+            ["Scrollbar"] =  { "Scrollbar.png", "https://github.com/sametexe001/images/blob/main/scrollbar.png?raw=true" },
+            ["Checkers"] = { "Checkers.png", "https://github.com/sametexe001/images/blob/main/checkers.png?raw=true" },
+            ["Resize"] = { "Resize.png", "https://github.com/sametexe001/images/blob/main/resize.png?raw=true" },
         },
 
         -- Ignore below
@@ -332,7 +332,6 @@ local Library do
     for _, FileName in Library.Folders do
         if not isfolder(FileName) then
             makefolder(FileName)
-            task.wait()
         end
     end
 
@@ -342,7 +341,6 @@ local Library do
         
         if not isfile(Library.Folders.Assets .. "/" .. ImageName) then
             writefile(Library.Folders.Assets .. "/" .. ImageName, game:HttpGet(ImageLink))
-            task.wait()
         end
     end
 
@@ -415,7 +413,6 @@ local Library do
 
             for Property, Value in NewItem.Properties do
                 NewItem.Instance[Property] = Value
-                task.wait()
             end
 
             return NewItem
@@ -720,12 +717,10 @@ local Library do
     Library.Unload = function(self)
         for Index, Value in self.Connections do 
             Value.Connection:Disconnect()
-            task.wait()
         end
 
         for Index, Value in self.Threads do 
             coroutine.close(Value)
-            task.wait()
         end
 
         if self.Holder then 
@@ -785,7 +780,6 @@ local Library do
                 Connection.Connection:Disconnect()
                 break
             end
-            task.wait()
         end
     end
 
@@ -806,7 +800,6 @@ local Library do
             if type(Value) == "string" then
                 Item[Property] = self.Theme[Value]
             end
-            task.wait()
         end
 
         TableInsert(self.ThemeItems, ThemeData)
@@ -825,7 +818,6 @@ local Library do
                 else
                     Config[Index] = Value
                 end
-                task.wait()
             end
         end)
 
@@ -850,7 +842,6 @@ local Library do
                 else
                     SetFunction(Value)
                 end
-                task.wait()
             end
         end)
 
@@ -882,7 +873,6 @@ local Library do
         for Index, Value in listfiles(Library.Folders.Configs) do
             local FileName = StringGSub(Value, Library.Folders.Directory .. "\\" .. ConfigFolderName .. "\\", "")
             List[Index] = FileName
-            task.wait()
         end
 
         local IsNew = #List ~= CurrentList
@@ -893,7 +883,6 @@ local Library do
                     IsNew = true
                     break
                 end
-                task.wait()
             end
         else
             CurrentList = List
@@ -920,7 +909,6 @@ local Library do
                 if type(Value) == "string" and Value == Theme then
                     Item.Item[Property] = Color
                 end
-                task.wait()
             end
         end
     end
@@ -1009,10 +997,10 @@ local Library do
             Items["Watermark"].Instance.Visible = Bool
         end
 
-        function Watermark:SetText(Text)
-            Items["Title"].Instance.Text = Text
-        end
-                    
+		function Watermark:SetText(Text)
+			Items["Title"].Instance.Text = Text
+		end
+										
         return Watermark
     end
 
@@ -1116,7 +1104,6 @@ local Library do
             elseif Value:IsA("Frame") then 
                 Value.BackgroundTransparency = 1
             end
-            task.wait()
         end
 
         Library:Thread(function()
@@ -1134,7 +1121,6 @@ local Library do
                 elseif Value:IsA("Frame") then
                     Tween:Create(Value, nil, {BackgroundTransparency = 0}, true)
                 end
-                task.wait()
             end
 
             task.delay(Duration + 0.1, function()
@@ -1148,7 +1134,6 @@ local Library do
                     elseif Value:IsA("Frame") then
                         Tween:Create(Value, nil, {BackgroundTransparency = 1}, true)
                     end
-                    task.wait()
                 end
 
                 task.wait(0.06)
@@ -1652,7 +1637,6 @@ local Library do
                 else
                     NewTween = Library:FadeItem(Value, ValueIndex, Bool, Data.FadeSpeed)
                 end
-                task.wait()
             end
 
             Library:Connect(NewTween.Tween.Completed, function()
@@ -2059,7 +2043,6 @@ local Library do
                         Tween:Create(Value, nil, {TextTransparency = 0}, true)
                         Value.ZIndex = 16
                     end
-                    task.wait()
                 end
             else 
                 for Index, Value in Items["Window"].Instance:GetDescendants() do 
@@ -2069,7 +2052,6 @@ local Library do
                         Tween:Create(Value, nil, {TextTransparency = 1}, true)
                         Value.ZIndex = 1
                     end
-                    task.wait()
                 end
 
                 task.wait(0.1)
@@ -2147,7 +2129,6 @@ local Library do
                     Value:Tween(nil, {TextColor3 = Library.Theme.Text})
                     Value:ChangeItemTheme({TextColor3 = "Text"})
                 end
-                task.wait()
             end
 
             if Keybind.Mode == "Always" then 
@@ -2429,7 +2410,6 @@ local Library do
                 else
                     NewTween = Library:FadeItem(Value, ValueIndex, Bool, Window.FadeSpeed)
                 end
-                task.wait()
             end
 
             Library:Connect(NewTween.Tween.Completed, function()
@@ -2606,7 +2586,6 @@ local Library do
                     }) 
 
                     Page.ColumnsData[Index] = NewColumn
-                    task.wait()
                 end
             else
                 Items["Columns"] = Instances:Create("Frame", {
@@ -2683,7 +2662,6 @@ local Library do
                 else
                     NewTween = Library:FadeItem(Value, ValueIndex, Bool, Page.Window.FadeSpeed or 0.5)
                 end
-                task.wait()
             end
 
             Library:Connect(NewTween.Tween.Completed, function()
@@ -2695,7 +2673,6 @@ local Library do
         Items["Inactive"]:Connect("MouseButton1Down", function()
             for Index, Value in Page.Window.Pages do
                 Value:Turn(Value == Page)
-                task.wait()
             end
         end)
 
@@ -2867,7 +2844,6 @@ local Library do
                 }) 
 
                 SubPage.ColumnsData[Index] = NewColumn
-                task.wait()
             end
         end
 
@@ -2913,12 +2889,10 @@ local Library do
                 if type(ValueIndex) == "table" then
                     for _, Property in ValueIndex do 
                         NewTween = Library:FadeItem(Value, Property, Bool, SubPage.Window.FadeSpeed or 0.5)
-                        task.wait()
                     end
                 else
                     NewTween = Library:FadeItem(Value, ValueIndex, Bool, SubPage.Window.FadeSpeed or 0.5)
                 end
-                task.wait()
             end
 
             Library:Connect(NewTween.Tween.Completed, function()
@@ -2930,7 +2904,6 @@ local Library do
         Items["Inactive"]:Connect("MouseButton1Down", function()
             for Index, Value in SubPage.Window.SubPages do
                 Value:Turn(Value == SubPage)
-                task.wait()
             end
         end)
 
@@ -3238,7 +3211,6 @@ local Library do
                     Padding = UDimNew(0, 6),
                     SortOrder = Enum.SortOrder.LayoutOrder
                 }) 
-                task.wait()
             end
 
             local Debounce = false
@@ -3282,7 +3254,6 @@ local Library do
                     else
                         NewTween = Library:FadeItem(Value, ValueIndex, Bool, MultiSection.Window.FadeSpeed or 0.5)
                     end
-                    task.wait()
                 end
 
                 Library:Connect(NewTween.Tween.Completed, function()
@@ -3294,7 +3265,6 @@ local Library do
             SubItems["Inactive"]:Connect("MouseButton1Down", function()
                 for Index, Value in MultiSection.SectionContents do
                     Value:Turn(Value == NewSection)
-                    task.wait()
                 end
             end)
 
@@ -4168,13 +4138,11 @@ local Library do
 
                     OptionData.Selected = true
                     OptionData:Toggle("Active")
-                    task.wait()
                 end
 
                 Library.Flags[Dropdown.Flag] = Dropdown.Value
 
                 Items["Value"].Instance.Text = TableConcat(Option, ", ")
-                
             else
                 if not Dropdown.Options[Option] then 
                     return
@@ -4192,7 +4160,6 @@ local Library do
                         Value.Selected = false
                         Value:Toggle("Inactive")
                     end
-                    task.wait()
                 end
 
                 Library.Flags[Dropdown.Flag] = Dropdown.Value
@@ -4306,7 +4273,6 @@ local Library do
                                 Value.Selected = false
                                 Value:Toggle("Inactive")
                             end
-                            task.wait()
                         end
                     else
                         Dropdown.Value = nil
@@ -4338,12 +4304,10 @@ local Library do
         function Dropdown:Refresh(List)
             for Index, Value in Dropdown.Options do 
                 Dropdown:Remove(Value.Name)
-                task.wait()
             end
 
             for Index, Value in List do 
                 Dropdown:Add(Value)
-                task.wait()
             end
         end
 
@@ -4386,12 +4350,10 @@ local Library do
                 if type(ValueIndex) == "table" then
                     for _, Property in ValueIndex do 
                         NewTween = Library:FadeItem(Value, Property, Bool, Dropdown.Window.FadeSpeed)
-                        task.wait()
                     end
                 else
                     NewTween = Library:FadeItem(Value, ValueIndex, Bool, Dropdown.Window.FadeSpeed)
                 end
-                task.wait()
             end
 
             Library:Connect(NewTween.Tween.Completed, function()
@@ -4403,7 +4365,6 @@ local Library do
 
         for Index, Value in Dropdown.Items do 
             Dropdown:Add(Value)
-            task.wait()
         end
 
         Items["Open"]:Connect("MouseButton1Down", function()
@@ -4765,7 +4726,6 @@ local Library do
 
                     OptionData.Selected = true
                     OptionData:Toggle("Active")
-                    task.wait()
                 end
             else
                 if not Listbox.Options[Option] then 
@@ -4786,7 +4746,6 @@ local Library do
                         Value.Selected = false
                         Value:Toggle("Inactive")
                     end
-                    task.wait()
                 end
             end
 
@@ -4812,12 +4771,10 @@ local Library do
         function Listbox:Refresh(List)
             for Index, Value in Listbox.Options do 
                 Listbox:Remove(Value.Name)
-                task.wait()
             end
 
             for Index, Value in List do 
                 Listbox:Add(Value)
-                task.wait()
             end
         end
 
@@ -4907,7 +4864,6 @@ local Library do
                                 Value.Selected = false
                                 Value:Toggle("Inactive")
                             end
-                            task.wait()
                         end
                     else
                         Listbox.Value = nil
@@ -4931,7 +4887,6 @@ local Library do
 
         for Index, Value in Listbox.Items do 
             Listbox:Add(Value)
-            task.wait()
         end
 
         if Listbox.Default then 
@@ -4946,5 +4901,5 @@ local Library do
     end
 end
 
-getgenv().Library = Library
+--getgenv().Library = Library
 return Library
