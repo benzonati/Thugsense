@@ -998,9 +998,9 @@ local Library do
         end
 
 		function Watermark:SetText(Text)
-			Items["Title"].Instance.Text = Text
-		end
-										
+            Items["Title"].Instance.Text = Text
+        end
+
         return Watermark
     end
 
