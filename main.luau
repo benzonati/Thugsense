@@ -1892,7 +1892,7 @@ local Library do
                 FontFace = Library.Font,
                 TextColor3 = FromRGB(215, 215, 215),
                 BorderColor3 = FromRGB(0, 0, 0),
-                Text = "MB2",
+                Text = " ",
                 Name = "\0",
                 BackgroundTransparency = 1,
                 Position = UDim2New(0, 1, 0, 0),
@@ -3625,7 +3625,7 @@ local Library do
                 Parent = Items["Toggle"],
                 Name = Data.Name or Data.name or "Keybind",
                 Flag = Data.Flag or Data.flag or Library:NextFlag(),
-                Default = Data.Default or Data.default or "MB2",
+                Default = Data.Default or Data.default or nil,
                 Mode = Data.Mode or Data.mode or "Toggle",
                 Callback = Data.Callback or Data.callback or function() end,
             }
@@ -4466,7 +4466,7 @@ local Library do
                 Parent = Items["Label"],
                 Name = Data.Name or Data.name or "Keybind",
                 Flag = Data.Flag or Data.flag or Library:NextFlag(),
-                Default = Data.Default or Data.default or "MB2",
+                Default = Data.Default or Data.default or nil,
                 Mode = Data.Mode or Data.mode or "Toggle",
                 Callback = Data.Callback or Data.callback or function() end,
             }
