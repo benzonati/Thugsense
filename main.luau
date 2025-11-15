@@ -2183,7 +2183,8 @@ local Library do
             Items["Text"]:ChangeItemTheme({TextColor3 = "Accent"})
 
             local InputBegan 
-            InputBegan = UserInputService.InputBegan:Connect(function(Input)
+            InputBegan = UserInputService.InputBegan:Connect(function(Input, gp)
+				if gp then return end
                 if Input.UserInputType == Enum.UserInputType.Keyboard then 
                     Keybind:Set(Input.KeyCode)
                 else
@@ -2199,7 +2200,8 @@ local Library do
             Keybind:SetOpen(not Keybind.IsOpen)
         end)
 
-        Library:Connect(UserInputService.InputBegan, function(Input)
+        Library:Connect(UserInputService.InputBegan, function(Input, gp)
+			if gp then return end
             if tostring(Input.KeyCode) == Keybind.Key or tostring(Input.UserInputType) == Keybind.Key then
                 if Keybind.Mode == "Toggle" then 
                     Keybind:Press()
@@ -2418,7 +2420,8 @@ local Library do
             end)
         end
 
-        Library:Connect(UserInputService.InputBegan, function(Input)
+        Library:Connect(UserInputService.InputBegan, function(Input, gp)
+			if gp then return end
             if tostring(Input.KeyCode) == Library.MenuKeybind or tostring(Input.UserInputType) == Library.MenuKeybind then
                 Window:SetOpen(not Window.IsOpen)
             end
