@@ -1892,7 +1892,7 @@ local Library do
                 FontFace = Library.Font,
                 TextColor3 = FromRGB(215, 215, 215),
                 BorderColor3 = FromRGB(0, 0, 0),
-                Text = "MB2",
+                Text = "  ",
                 Name = "\0",
                 BackgroundTransparency = 1,
                 Position = UDim2New(0, 1, 0, 0),
