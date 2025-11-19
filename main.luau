@@ -1000,7 +1000,10 @@ local Library do
 		function Watermark:SetText(Text)
             Items["Title"].Instance.Text = Text
         end
-        
+
+        Watermark.Text = Items["Title"].Instance.Text
+		Watermark.Visible = Items["Watermark"].Instance.Visible
+
         return Watermark
     end
 
