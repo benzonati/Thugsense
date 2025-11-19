@@ -995,10 +995,12 @@ local Library do
 
         function Watermark:SetVisibility(Bool)
             Items["Watermark"].Instance.Visible = Bool
+			Watermark.Visible = Bool
         end
 
 		function Watermark:SetText(Text)
             Items["Title"].Instance.Text = Text
+			Watermark.Text = Text
         end
 
         Watermark.Text = Items["Title"].Instance.Text
