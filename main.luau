@@ -2074,10 +2074,10 @@ local Library do
             if StringFind(tostring(Key), "Enum") then 
                 Keybind.Key = tostring(Key)
 
-                Key = Key.Name == "Backspace" and "None" or Key.Name
+                Key = Key.Name == "Backspace" and " " or Key.Name
 
-                local KeyString = Keys[Keybind.Key] or StringGSub(Key, "Enum.", "") or "None"
-                local TextToDisplay = StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or "None"
+                local KeyString = Keys[Keybind.Key] or StringGSub(Key, "Enum.", "") or "Empty"
+                local TextToDisplay = StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or "Empty"
 
                 Keybind.Value = TextToDisplay
                 Items["Text"].Instance.Text = TextToDisplay
@@ -2094,7 +2094,7 @@ local Library do
                     Library:SafeCall(Data.Callback, Keybind.Toggled)
                 end
             elseif type(Key) == "table" then 
-                local RealKey = Key.Key == "Backspace" and "None" or Key.Key
+                local RealKey = Key.Key == "Backspace" and " " or Key.Key
                 Keybind.Key = tostring(Key.Key)
 
                 if Key.Mode then
@@ -2106,7 +2106,7 @@ local Library do
                 end
 
                 local KeyString = Keys[Keybind.Key] or StringGSub(tostring(RealKey), "Enum.", "") or RealKey
-                local TextToDisplay = KeyString and StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or "None"
+                local TextToDisplay = KeyString and StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or "Empty"
 
                 TextToDisplay = StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "")
 
@@ -3633,7 +3633,7 @@ local Library do
                 Parent = Items["Toggle"],
                 Name = Data.Name or Data.name or "Keybind",
                 Flag = Data.Flag or Data.flag or Library:NextFlag(),
-                Default = Data.Default or Data.default or "MB2",
+                Default = Data.Default or Data.default or "Empty",
                 Mode = Data.Mode or Data.mode or "Toggle",
                 Callback = Data.Callback or Data.callback or function() end,
             }
@@ -4474,7 +4474,7 @@ local Library do
                 Parent = Items["Label"],
                 Name = Data.Name or Data.name or "Keybind",
                 Flag = Data.Flag or Data.flag or Library:NextFlag(),
-                Default = Data.Default or Data.default or "MB2",
+                Default = Data.Default or Data.default or "Empty",
                 Mode = Data.Mode or Data.mode or "Toggle",
                 Callback = Data.Callback or Data.callback or function() end,
             }
