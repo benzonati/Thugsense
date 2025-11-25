@@ -1,7 +1,7 @@
 -- Thugsense
 --[[
     Made by samet
-	Fixed/IMproved by benz
+	Fixed/Improved by benz
 
     Assign different flags to each element to prevent from configs overriding eachother
 
