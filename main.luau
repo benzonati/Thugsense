@@ -1,9 +1,9 @@
 -- Thugsense
 --[[
     Made by samet
+	Fixed/IMproved by benz
 
     Assign different flags to each element to prevent from configs overriding eachother
-    Example script is at the bottom
 
     Documentation:
     function Library:Window(Data: table
